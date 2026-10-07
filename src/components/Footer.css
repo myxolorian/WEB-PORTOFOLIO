@@ -1,0 +1,144 @@
+.footer {
+  padding: 64px var(--gutter);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 460px) repeat(3, 1fr);
+  gap: 64px;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.footer__socials {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  transition: color 0.3s var(--ease-out);
+}
+
+.footer__social:hover {
+  color: var(--text);
+}
+
+.footer__social:hover .badge {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--inverse);
+}
+
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.footer__heading {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__links a,
+.footer__links button {
+  color: var(--text-muted);
+  transition: color 0.3s var(--ease-out);
+}
+
+.footer__links a:hover,
+.footer__links button:hover {
+  color: var(--text);
+}
+
+.footer__links--plain {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.footer__cv {
+  margin-top: -8px;
+}
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer__copy {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+.footer__top:hover .badge {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--inverse);
+}
+
+.footer__top:hover .badge svg {
+  transform: translateY(-3px);
+}
+
+.footer__top .badge svg {
+  transition: transform 0.4s var(--ease-out);
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__inner {
+    gap: 56px;
+  }
+
+  .footer__bottom {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+}

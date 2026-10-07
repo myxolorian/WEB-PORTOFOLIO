@@ -1,0 +1,42 @@
+.services {
+  padding-top: clamp(24px, 3vw, 80px);
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.services__card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: clamp(28px, 3.2vw, 48px);
+  transition:
+    border-color 0.5s var(--ease-out),
+    background-color 0.5s var(--ease-out);
+}
+
+.services__card:hover {
+  border-color: var(--border-strong);
+  background: rgba(218, 197, 167, 0.07);
+}
+
+.services__text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.services__text .h4 {
+  margin-top: -4px;
+}
+
+@media (max-width: 960px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

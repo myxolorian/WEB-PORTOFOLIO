@@ -1,0 +1,47 @@
+.portrait {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 880 / 769;
+  /* fade the bottom of the photo into the page, as in the design */
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent 96%);
+}
+
+.portrait__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  mix-blend-mode: lighten;
+}
+
+.portrait--placeholder {
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    ellipse 42% 48% at 50% 42%,
+    rgba(218, 197, 167, 0.1),
+    rgba(218, 197, 167, 0.03) 60%,
+    transparent 75%
+  );
+}
+
+.portrait__silhouette {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait__hint {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 6px 12px;
+  border: 1px dashed var(--border-strong);
+  border-radius: 500px;
+  color: var(--text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}

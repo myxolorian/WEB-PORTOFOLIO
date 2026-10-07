@@ -1,0 +1,439 @@
+/* Design tokens taken from the reference design */
+:root {
+  --bg: #0e0e0e;
+  --text: #dac5a7;
+  --text-muted: rgba(218, 197, 167, 0.6);
+  --text-faint: rgba(218, 197, 167, 0.35);
+  --inverse: #0e0e0e;
+  --surface: rgba(218, 197, 167, 0.05);
+  --surface-strong: rgba(218, 197, 167, 0.1);
+  --border: rgba(218, 197, 167, 0.15);
+  --border-strong: rgba(218, 197, 167, 0.3);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.15);
+
+  --font-sans: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Chillax', 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Gambetta', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+
+  --radius: 2px;
+  --container: 1400px;
+  --gutter: clamp(16px, 4.5vw, 64px);
+  --section-space: clamp(96px, 12vw, 160px);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+dl,
+figure,
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--inverse);
+}
+
+:focus-visible {
+  outline: 1px solid var(--text);
+  outline-offset: 4px;
+}
+
+/* Subtle film grain over the whole page, like the noise layer in the design */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-top: var(--section-space);
+  scroll-margin-top: 24px;
+}
+
+/* ---------- Typography ---------- */
+
+.serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+}
+
+.meta {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.display {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.h2 {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(40px, 5.6vw, 64px);
+  line-height: 1.1;
+}
+
+.h4 {
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(20px, 2vw, 24px);
+  line-height: 1.3;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.body-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+}
+
+.section-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  margin-bottom: clamp(48px, 7vw, 96px);
+}
+
+.section-head .h2 {
+  font-size: clamp(44px, 7vw, 96px);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.section-head p:last-child {
+  max-width: 460px;
+}
+
+/* ---------- Surfaces ---------- */
+
+.card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 500px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  transition:
+    background-color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
+}
+
+.badge--sm {
+  width: 32px;
+  height: 32px;
+}
+
+.badge--md {
+  width: 38px;
+  height: 38px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 500px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out);
+}
+
+.btn svg {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.btn:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.btn--primary {
+  background: var(--text);
+  color: var(--inverse);
+}
+
+.btn--primary:hover {
+  background: #eadbc4;
+}
+
+.btn--ghost {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-strong);
+}
+
+/* Small round icon + uppercase text, like "About webdesign" in the design */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.text-link .badge svg {
+  transition: transform 0.4s var(--ease-out);
+}
+
+.text-link:hover .badge {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--inverse);
+}
+
+.text-link:hover .badge svg {
+  transform: rotate(45deg);
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  min-width: 100%;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* ---------- Utilities ---------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 200;
+  transform: translateY(-200%);
+  transition: transform 0.3s var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation-duration: 0s;
+    animation-play-state: paused;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Animation helpers ---------- */
+
+.mask-line {
+  display: block;
+  overflow: hidden;
+  /* room for italic overhangs and descenders so they are not clipped */
+  padding: 0.04em 0.08em 0.14em;
+  margin: -0.04em -0.08em -0.14em;
+}
+
+.mask-line__inner {
+  display: block;
+  will-change: transform;
+}
+
+html.is-scroll-locked {
+  overflow: hidden;
+}
