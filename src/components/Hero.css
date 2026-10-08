@@ -12,15 +12,18 @@
   position: absolute;
   top: 8%;
   left: -12%;
-  width: min(70vw, 900px);
+  width: min(70vw, 900px, 92svh);
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(
-    circle,
+    circle closest-side,
     rgba(218, 197, 167, 0.1),
-    rgba(218, 197, 167, 0.03) 40%,
-    transparent 68%
+    rgba(218, 197, 167, 0.03) 55%,
+    transparent 100%
   );
+  /* fade out well before the hero's bottom edge so the glow is never cut off */
+  -webkit-mask-image: linear-gradient(to bottom, #000 45%, transparent 80%);
+  mask-image: linear-gradient(to bottom, #000 45%, transparent 80%);
   pointer-events: none;
 }
 
@@ -113,7 +116,6 @@
   border-radius: 4px;
   background: var(--surface);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
 }
 
 .hero__stat {
