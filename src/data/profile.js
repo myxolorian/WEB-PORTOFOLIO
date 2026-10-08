@@ -9,12 +9,11 @@ export const profile = {
   location: 'Jakarta, Indonesia',
   university: 'BINUS University',
 
-  // PHOTO PLACEHOLDER
-  // 1. Put your photo in /public/images/ (e.g. /public/images/kevin.png)
-  // 2. Change the value below to '/images/kevin.png'
-  // A portrait with a dark or transparent background blends best with the design.
-  // While this is null, a styled placeholder is shown instead.
-  photo: null,
+  // PHOTO (shown in the hero, inside the circle)
+  // Put your photo in /public/images/ and point this path to it, e.g. '/images/kevin.png'.
+  // Works best with a transparent PNG/WebP portrait (head and shoulders, face centred).
+  // Set it to null to show a styled placeholder instead.
+  photo: '/images/profile/kevin.webp',
 
   email: 'kevinmahardhika6@gmail.com',
   phone: '+62 812-1357-3753',
@@ -24,31 +23,25 @@ export const profile = {
   cv: '/KevinMahardhikaMulya_CV_2026.pdf',
 
   hero: {
+    greeting: 'Hi, I am',
     titleTop: 'Fullstack Developer',
     titleBottom: '& AI Engineer',
     subtitle:
       'Computer Science student at BINUS University building AI-driven web apps that turn complex problems into useful products.',
-  },
-
-  about: {
-    headingTop: 'Tech that solves',
-    headingBottom: 'real human problems.',
-    paragraphs: [
-      "Hello! I'm Kevin Mahardhika Mulya, a Computer Science student at BINUS University with a deep interest in Artificial Intelligence and full-stack development.",
-      "My interest in tech started when I built my first website. I quickly realised I enjoy solving complex problems, so I expanded into AI/ML. Since then I've built several projects that merge AI with web applications. For me, tech is not simply about writing code. It is about solving real human problems and turning them into solutions that help many people.",
-    ],
-    facts: [
-      { label: 'Based in', value: 'Jakarta, Indonesia' },
-      { label: 'Studying', value: 'Computer Science, BINUS' },
-      { label: 'GPA', value: '3.50 / 4.00' },
-      { label: 'Graduating', value: '2028' },
+    // Numbers in the stats box. `decimals` controls the count-up animation.
+    stats: [
+      { value: 5, suffix: '+', label: 'Projects built' },
+      { value: 3, label: 'Organizations' },
+      { value: 3.5, decimals: 2, label: 'GPA' },
     ],
   },
 }
-
+// Navbar and footer links, in the same order as the sections on the page.
 export const navLinks = [
+  { id: 'top', label: 'Home' },
+  { id: 'services', label: 'Services' },
   { id: 'work', label: 'Work' },
   { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
-  { id: 'about', label: 'About' },
+  { id: 'contact', label: 'Contact' },
 ]

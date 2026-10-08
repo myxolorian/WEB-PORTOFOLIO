@@ -17,13 +17,15 @@ npm run build    # build produksi ke folder dist/
 npm run lint
 ```
 
-## Mengganti foto (placeholder)
+## Mengganti foto
+
+Foto tampil di bagian Hero, di dalam lingkaran (kepala sedikit keluar dari lingkaran).
 
 1. Simpan foto di `public/images/`, misalnya `public/images/kevin.png`.
-2. Buka `src/data/profile.js` dan ubah `photo: null` menjadi `photo: '/images/kevin.png'`.
+2. Buka `src/data/profile.js` dan ubah `photo` menjadi `'/images/kevin.png'`.
 
-Foto otomatis dipakai di bagian Hero dan About. Hasil terbaik: foto portrait dengan
-latar gelap atau PNG transparan (bagian bawah foto akan memudar ke background).
+Hasil terbaik: PNG/WebP transparan (tanpa background), kepala sampai dada, wajah di tengah,
+dengan proporsi sekitar 2 : 3 (lebar : tinggi). Isi `photo: null` untuk menampilkan placeholder.
 
 ## Mengedit konten
 
@@ -31,11 +33,11 @@ Semua isi website ada di `src/data/`, jadi tidak perlu menyentuh komponen:
 
 | File | Isi |
 | --- | --- |
-| `profile.js` | nama, kontak, link sosial, teks hero & about, path CV |
+| `profile.js` | nama, kontak, link sosial, teks & statistik hero, path CV, link navbar |
 | `projects.js` | daftar project + isi pop-up detail |
 | `experience.js` | timeline pengalaman & pendidikan |
-| `skills.js` | kartu skill dan teks berjalan (marquee) teknologi |
-| `services.js` | tiga kartu "What I do" |
+| `skills.js` | kartu-kartu di section Skills |
+| `services.js` | tiga kartu di section Services |
 
 ### Screenshot project
 
@@ -69,5 +71,5 @@ src/
   lib/          smooth scroll (Lenis), easing, link sosial
   styles/       design tokens & style global
 public/
-  images/       screenshot project, og-image
+  images/       foto profil, screenshot project, og-image
 ```

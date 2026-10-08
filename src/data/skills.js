@@ -1,4 +1,4 @@
-// Skill groups for the "Skills & Toolkit" section and the tech marquee.
+// Skill groups for the "Skills & Toolkit" section.
 
 export const skillGroups = [
   {
@@ -61,21 +61,4 @@ export const skillGroups = [
     icon: 'translate',
     items: ['Indonesian', 'English', 'Git & GitHub', 'Vercel'],
   },
-]
-
-export const marqueeTech = [
-  'React.js',
-  'Node.js',
-  'Express.js',
-  'PostgreSQL',
-  'Python',
-  'FastAPI',
-  'YOLOv8',
-  'OpenCV',
-  'Sentence-BERT',
-  'ASP.NET Core',
-  'Supabase',
-  'Socket.IO',
-  'Tailwind CSS',
-  'TypeScript',
 ]

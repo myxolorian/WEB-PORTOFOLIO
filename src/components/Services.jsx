@@ -1,15 +1,24 @@
 import { ArrowUpRight } from '@phosphor-icons/react'
 import { services } from '../data/services'
-import { Reveal } from './Reveal'
+import { MaskLines, Reveal } from './Reveal'
 import './Services.css'
 
 export default function Services({ onOpenProject }) {
   return (
-    <section className="services" aria-labelledby="services-title">
+    <section id="services" className="section services" aria-labelledby="services-title">
       <div className="container">
-        <h2 id="services-title" className="sr-only">
-          What I do
-        </h2>
+        <header className="section-head">
+          <Reveal as="p" className="meta">
+            Services
+          </Reveal>
+          <h2 id="services-title" className="h2">
+            <MaskLines lines={['What I', <span className="serif">can do</span>]} />
+          </h2>
+          <Reveal as="p" className="body-text" delay={0.2}>
+            From the database to the model to the interface, these are the things I build.
+          </Reveal>
+        </header>
+
         <ul className="services__grid">
           {services.map((service, i) => (
             <Reveal as="li" key={service.title} delay={i * 0.1} className="services__card card">

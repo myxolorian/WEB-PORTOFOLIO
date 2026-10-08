@@ -1,87 +1,223 @@
 .hero {
-  --portrait-w: clamp(300px, min(46vw, 64svh), 880px);
-
   position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
   min-height: 100svh;
-  padding: 0 var(--gutter) clamp(64px, 8vw, 120px);
+  padding: clamp(112px, 14vh, 152px) 0 clamp(56px, 8vh, 96px);
   overflow: hidden;
 }
 
-.hero__portrait {
-  width: var(--portrait-w);
-  margin-top: clamp(72px, 5vw, 96px);
-  will-change: transform;
+/* soft warm light behind the text, like the glow in the reference */
+.hero__glow {
+  position: absolute;
+  top: 8%;
+  left: -12%;
+  width: min(70vw, 900px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(218, 197, 167, 0.1),
+    rgba(218, 197, 167, 0.03) 40%,
+    transparent 68%
+  );
+  pointer-events: none;
 }
 
-.hero__content {
+.hero__inner {
   position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   align-items: center;
-  gap: 16px;
-  /* the title overlaps the lower part of the portrait, as in the design */
-  margin-top: calc(var(--portrait-w) * -0.16);
-  text-align: center;
+  gap: clamp(32px, 5vw, 96px);
 }
 
-.hero__title {
-  font-size: clamp(38px, 8.4vw, 160px);
-  color: var(--text);
-}
+/* ---------- Text ---------- */
 
-.hero__title .serif {
-  letter-spacing: -0.5px;
-}
-
-.hero__subtitle {
-  max-width: 600px;
-  text-wrap: balance;
+.hero__greeting {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: clamp(17px, 1.5vw, 24px);
-  line-height: 1.5;
+  font-size: clamp(16px, 1.3vw, 20px);
   color: var(--text-muted);
 }
 
-.hero__scroll {
+.hero__name {
+  margin-top: 6px;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(22px, 2vw, 30px);
+  line-height: 1.25;
+  letter-spacing: 0.3px;
+  color: var(--text);
+}
+
+.hero__title {
+  margin-top: 18px;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: clamp(36px, 4.4vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -1px;
+}
+
+/* warm gradient across each line of the title */
+.hero__title .mask-line__inner {
+  display: inline-block;
+  padding-right: 0.06em;
+  background: linear-gradient(90deg, #b8925f 0%, #dac5a7 45%, #f3e6d1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__subtitle {
+  max-width: 520px;
+  margin-top: 22px;
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+.hero__socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero__social:hover {
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--inverse);
+  transform: translateY(-3px);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
   margin-top: 32px;
 }
 
-.hero__scroll .badge svg {
-  animation: hero-bob 2.4s var(--ease-in-out) infinite;
+.hero__btn {
+  padding: 14px 24px;
+  border-radius: 4px;
 }
 
-.hero__scroll:hover .badge svg {
-  transform: none;
+.hero__stats {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  width: fit-content;
+  margin-top: 44px;
+  padding: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--surface);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
-@keyframes hero-bob {
-  0%,
-  100% {
-    transform: translateY(-2px);
-  }
-  50% {
-    transform: translateY(3px);
-  }
+.hero__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 clamp(18px, 2vw, 32px);
 }
 
-@media (max-width: 640px) {
+.hero__stat + .hero__stat {
+  border-left: 1px solid var(--border);
+}
+
+.hero__stat-value {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.hero__stat-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Photo ---------- */
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+  will-change: transform;
+}
+
+/* The frame matches the photo's proportions. Its bottom corners are rounded
+   to the circle, so the photo is cut along the circle while the head pops
+   out above it. */
+.hero__frame {
+  --w: clamp(240px, min(32vw, 52svh), 500px);
+
+  position: relative;
+  width: var(--w);
+  aspect-ratio: 460 / 678;
+  overflow: hidden;
+  border-radius: 0 0 calc(var(--w) / 2) calc(var(--w) / 2);
+}
+
+.hero__circle {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: radial-gradient(circle at 50% 28%, #2a2724, #1a1917 72%);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
   .hero {
-    --portrait-w: min(92vw, 420px);
+    padding-top: 92px;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero__visual {
+    order: -1;
+  }
+
+  .hero__frame {
+    --w: min(56vw, 260px);
+  }
+
+  .hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero__title .mask-line {
+    text-align: center;
+  }
+
+  .hero__socials,
+  .hero__actions {
     justify-content: center;
   }
-
-  .hero__content {
-    margin-top: calc(var(--portrait-w) * -0.22);
-  }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero__scroll .badge svg {
-    animation: none;
+@media (max-width: 420px) {
+  .hero__stat {
+    padding: 0 14px;
+  }
+
+  .hero__stat-label {
+    font-size: 12px;
   }
 }

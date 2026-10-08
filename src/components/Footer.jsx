@@ -40,11 +40,6 @@ export default function Footer({ onOpenProject }) {
           <nav className="footer__col" aria-label="Footer">
             <p className="footer__heading">Navigate</p>
             <ul className="footer__links">
-              <li>
-                <a href="#top" className="meta" onClick={(e) => go(e, 'top')}>
-                  Home
-                </a>
-              </li>
               {navLinks.map((link) => (
                 <li key={link.id}>
                   <a href={`#${link.id}`} className="meta" onClick={(e) => go(e, link.id)}>
@@ -52,11 +47,6 @@ export default function Footer({ onOpenProject }) {
                   </a>
                 </li>
               ))}
-              <li>
-                <a href="#contact" className="meta" onClick={(e) => go(e, 'contact')}>
-                  Contact
-                </a>
-              </li>
             </ul>
           </nav>
 

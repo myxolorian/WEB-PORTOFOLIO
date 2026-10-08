@@ -6,8 +6,6 @@ import { useSmoothScroll } from '../lib/SmoothScroll'
 import { EASE } from '../lib/easing'
 import './Header.css'
 
-const sectionIds = ['top', ...navLinks.map((l) => l.id), 'contact']
-
 export default function Header() {
   const { scrollTo, lock, unlock } = useSmoothScroll()
   const { scrollY } = useScroll()
@@ -19,7 +17,7 @@ export default function Header() {
   // Hide the bar while scrolling down, bring it back when scrolling up.
   useMotionValueEvent(scrollY, 'change', (y) => {
     const prev = scrollY.getPrevious() ?? 0
-    setScrolled(y > 40)
+    setScrolled(y > 24)
     setHidden(y > 240 && y > prev)
   })
 
@@ -33,7 +31,7 @@ export default function Header() {
       },
       { rootMargin: '-45% 0px -50% 0px' },
     )
-    sectionIds.forEach((id) => {
+    navLinks.forEach(({ id }) => {
       const el = document.getElementById(id)
       if (el) observer.observe(el)
     })
@@ -61,45 +59,48 @@ export default function Header() {
   return (
     <header className="header">
       <motion.nav
-        className={`header__bar ${scrolled ? 'is-scrolled' : ''}`}
+        className={`header__bar ${scrolled || menuOpen ? 'is-scrolled' : ''}`}
         aria-label="Main"
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: hidden && !menuOpen ? -120 : 0, opacity: 1 }}
+        initial={{ y: '-100%', opacity: 0 }}
+        animate={{ y: hidden && !menuOpen ? '-100%' : '0%', opacity: 1 }}
         transition={{ duration: 0.8, ease: EASE }}
       >
-        <a href="#top" className="logo" onClick={(e) => go(e, 'top')} aria-label="Back to top">
-          {profile.shortName}
-          <span>.</span>
-        </a>
+        <div className="header__inner">
+          <a href="#top" className="logo" onClick={(e) => go(e, 'top')} aria-label="Back to top">
+            {profile.shortName}
+            <span>.</span>
+          </a>
 
-        <ul className="header__links">
-          {navLinks.map((link) => (
-            <li key={link.id}>
-              <a
-                href={`#${link.id}`}
-                className={`header__link meta ${active === link.id ? 'is-active' : ''}`}
-                onClick={(e) => go(e, link.id)}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+          <ul className="header__links">
+            {navLinks.map((link) => (
+              <li key={link.id}>
+                <a
+                  href={`#${link.id}`}
+                  className={`header__link ${active === link.id ? 'is-active' : ''}`}
+                  aria-current={active === link.id ? 'true' : undefined}
+                  onClick={(e) => go(e, link.id)}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
 
-        <a href="#contact" className="btn btn--primary header__cta" onClick={(e) => go(e, 'contact')}>
-          Let’s talk
-        </a>
+          <a href="#contact" className="btn btn--primary header__cta" onClick={(e) => go(e, 'contact')}>
+            Let’s talk
+          </a>
 
-        <button
-          type="button"
-          className="header__menu-btn"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-          onClick={() => setMenuOpen((v) => !v)}
-        >
-          {menuOpen ? <X size={22} weight="light" /> : <List size={22} weight="light" />}
-        </button>
+          <button
+            type="button"
+            className="header__menu-btn"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X size={22} weight="light" /> : <List size={22} weight="light" />}
+          </button>
+        </div>
       </motion.nav>
 
       <AnimatePresence>
@@ -113,11 +114,11 @@ export default function Header() {
             transition={{ duration: 0.7, ease: EASE }}
           >
             <ul className="mobile-menu__links">
-              {[...navLinks, { id: 'contact', label: 'Contact' }].map((link, i) => (
+              {navLinks.map((link, i) => (
                 <li key={link.id} className="mask-line">
                   <motion.a
                     href={`#${link.id}`}
-                    className="mobile-menu__link mask-line__inner"
+                    className={`mobile-menu__link mask-line__inner ${active === link.id ? 'is-active' : ''}`}
                     onClick={(e) => go(e, link.id)}
                     initial={{ y: '110%' }}
                     animate={{ y: '0%' }}
