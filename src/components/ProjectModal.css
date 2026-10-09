@@ -15,7 +15,6 @@
   inset: 0;
   background: rgba(6, 6, 6, 0.72);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .modal__panel {
@@ -359,7 +358,6 @@
   padding: clamp(56px, 6vw, 80px) clamp(16px, 7vw, 96px);
   background: rgba(10, 10, 9, 0.94);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
 }
 
 .lightbox__figure {

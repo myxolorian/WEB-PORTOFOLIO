@@ -212,7 +212,6 @@ body::after {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
 }
 
 .badge {
@@ -226,7 +225,6 @@ body::after {
   background: var(--surface);
   border: 1px solid var(--border);
   backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
   transition:
     background-color 0.4s var(--ease-out),
     border-color 0.4s var(--ease-out),

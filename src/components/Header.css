@@ -4,11 +4,14 @@
   left: 0;
   right: 0;
   z-index: 50;
+  /* the header box stays in place when the bar slides away, so it must not catch clicks */
+  pointer-events: none;
 }
 
 .header__bar {
   position: relative;
   z-index: 2;
+  pointer-events: auto;
   border-bottom: 1px solid transparent;
   transition:
     background-color 0.5s var(--ease-out),
@@ -20,7 +23,6 @@
   background: rgba(14, 14, 14, 0.78);
   border-color: var(--border);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 /* logo left, links centred, button right — as in the reference */
@@ -120,8 +122,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 32px;
   padding: 112px 24px 40px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background: #121110;
+  pointer-events: auto;
 }
 
 .mobile-menu__links {
@@ -136,7 +142,7 @@
   gap: 16px;
   font-family: var(--font-sans);
   font-weight: 300;
-  font-size: clamp(38px, 10.5vw, 60px);
+  font-size: clamp(28px, min(10.5vw, 8svh), 60px);
   line-height: 1.1;
   color: var(--text-muted);
 }
@@ -160,6 +166,14 @@
 .mobile-menu__socials {
   display: flex;
   gap: 24px;
+}
+
+/* landscape phones: start the list higher so every link fits */
+@media (max-height: 520px) {
+  .mobile-menu {
+    justify-content: flex-start;
+    padding-top: 84px;
+  }
 }
 
 @media (max-width: 960px) {

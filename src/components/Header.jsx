@@ -108,6 +108,7 @@ export default function Header() {
           <motion.div
             id="mobile-menu"
             className="mobile-menu"
+            data-lenis-prevent
             initial={{ clipPath: 'inset(0 0 100% 0)' }}
             animate={{ clipPath: 'inset(0 0 0% 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
@@ -119,6 +120,7 @@ export default function Header() {
                   <motion.a
                     href={`#${link.id}`}
                     className={`mobile-menu__link mask-line__inner ${active === link.id ? 'is-active' : ''}`}
+                    aria-current={active === link.id ? 'true' : undefined}
                     onClick={(e) => go(e, link.id)}
                     initial={{ y: '110%' }}
                     animate={{ y: '0%' }}
