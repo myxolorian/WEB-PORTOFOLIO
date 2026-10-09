@@ -8,8 +8,8 @@ export const services = [
     cta: 'See TaskWeaver',
   },
   {
-    title: 'AI & NLP',
-    text: 'Chatbots and recommendation engines powered by semantic search, Sentence-BERT embeddings and retrieval-augmented generation.',
+    title: 'Natural Language Processing',
+    text: 'Chatbots and recommendation engines powered by semantic search, Sentence-BERT embeddings and retrieval augmented generation.',
     project: 'caloriq',
     cta: 'See CalorIQ',
   },

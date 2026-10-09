@@ -31,7 +31,7 @@ export const profile = {
     // Numbers in the stats box. `decimals` controls the count-up animation.
     stats: [
       { value: 5, suffix: '+', label: 'Projects built' },
-      { value: 3, label: 'Organizations' },
+      { value: 2, label: 'Organizations' },
       { value: 3.5, decimals: 2, label: 'GPA' },
     ],
   },
