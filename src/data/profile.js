@@ -13,7 +13,7 @@ export const profile = {
   // Put your photo in /public/images/ and point this path to it, e.g. '/images/kevin.png'.
   // Works best with a transparent PNG/WebP portrait (head and shoulders, face centred).
   // Set it to null to show a styled placeholder instead.
-  photo: '/images/profile/kevin.webp',
+  photo: '/images/kevin.png',
 
   email: 'kevinmahardhika6@gmail.com',
   phone: '+62 812-1357-3753',
