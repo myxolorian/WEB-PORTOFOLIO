@@ -32,16 +32,14 @@ function mosaicColumns(images) {
 }
 
 // Project artwork.
-// - "mosaic" (cards): a tilted grid of the project's screenshots on a gradient.
+// - "mosaic" (cards): a tilted grid of the project's screenshots.
 // - "flat" (pop-up header): the first screenshot in a browser window.
 // Projects without screenshots get a typographic cover in both cases.
 export default function ProjectCover({ project, variant = 'mosaic', eager = false }) {
   const images = project.gallery.map((g) => g.src)
-  const style = { '--accent': project.accent, '--accent2': project.accent2 ?? project.accent }
-
   if (!images.length) {
     return (
-      <div className="cover" style={style}>
+      <div className="cover">
         <div className="cover__backdrop" aria-hidden="true" />
         <div className="cover__type" aria-hidden="true">
           <span className="serif">{project.title}</span>
@@ -52,7 +50,7 @@ export default function ProjectCover({ project, variant = 'mosaic', eager = fals
 
   if (variant === 'flat') {
     return (
-      <div className="cover cover--flat" style={style}>
+      <div className="cover cover--flat">
         <div className="cover__backdrop" aria-hidden="true" />
         <div className="cover__window">
           <div className="cover__bar" aria-hidden="true">
@@ -67,7 +65,7 @@ export default function ProjectCover({ project, variant = 'mosaic', eager = fals
   }
 
   return (
-    <div className="cover cover--mosaic" style={style} aria-hidden="true">
+    <div className="cover cover--mosaic" aria-hidden="true">
       <div className="cover__backdrop" />
       <div className="mosaic">
         {mosaicColumns(images).map((column, c) => (

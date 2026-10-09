@@ -17,9 +17,6 @@ function ProjectCard({ project, index, onOpen }) {
       >
         <div className="project-card__media">
           <ProjectCover project={project} />
-          <span className="badge project-card__badge" aria-hidden="true">
-            <ArrowUpRight size={20} weight="light" />
-          </span>
           <div className="project-card__label">
             <span className="project-card__title">{project.title}</span>
             <span className="meta">{project.category}</span>

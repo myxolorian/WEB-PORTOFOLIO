@@ -48,8 +48,8 @@ pada `src/data/projects.js`. Screenshot PNG/JPG ukuran penuh (misal 1920×1080) 
   membuat salinan WebP kecil (640px) dan sedang (1600px) di folder `_opt/`. Website memakai
   salinan ini, jadi tetap ringan. Folder `_opt/` tidak perlu di-commit (sudah di `.gitignore`),
   Vercel membuatnya sendiri saat build.
-- Thumbnail kartu project adalah mosaic miring dari gambar-gambar `gallery`, di atas gradient
-  dari `accent` ke `accent2` (atur warnanya per project).
+- Thumbnail kartu project adalah mosaic miring dari gambar-gambar `gallery`, di atas latar
+  gelap-krem yang sama dengan tema website.
 - Untuk membuat ulang salinan secara manual: `npm run images`.
 
 ### Kartu "Coming soon"
