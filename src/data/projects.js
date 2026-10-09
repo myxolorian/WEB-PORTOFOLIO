@@ -1,8 +1,10 @@
 // Projects shown in "Selected Work" and in the detail pop-up.
 //
 // To add screenshots: drop images in /public/images/projects/<slug>/ and list
-// them in `gallery`. The first gallery image is used as the card cover unless
-// `cover` is set. Projects without images get a typographic cover.
+// them in `gallery`. The card thumbnail is a tilted mosaic of the gallery
+// images on a gradient from `accent` to `accent2`. Projects without images get
+// a typographic cover. Small WebP copies are generated automatically
+// (scripts/optimize-images.mjs), so full-size PNG screenshots are fine.
 
 const img = (slug, file) => `/images/projects/${slug}/${file}`
 
@@ -13,7 +15,8 @@ export const projects = [
     category: 'Fullstack · AI',
     year: '2026',
     role: 'Back-End Developer',
-    accent: '#4aa3ff',
+    accent: '#3b82f6',
+    accent2: '#8b5cf6',
     tagline: 'AI-powered task management for group projects.',
     summary:
       'Splits big tasks into subtasks and assigns each one to the teammate whose skills fit best, with real-time chat built in.',
@@ -55,6 +58,7 @@ export const projects = [
     year: '2026',
     role: 'Fullstack Developer',
     accent: '#ff6a3d',
+    accent2: '#f5b041',
     tagline: 'Calories and nutrition from a photo, a video or a live camera.',
     summary:
       'Detects food with YOLOv8 and OpenCV, estimates the portion, and reports calories, protein, carbs and fat.',
@@ -92,12 +96,13 @@ export const projects = [
     category: 'NLP · RAG',
     year: '2026',
     role: 'AI Engineer',
-    accent: '#4cc46a',
+    accent: '#22c55e',
+    accent2: '#14b8a6',
     tagline: 'A chatbot that recommends recipes that fit your body and your cravings.',
     summary:
       'Semantic recipe search with Sentence-BERT plus a RAG layer on Groq/Llama, tuned to your BMI and daily calories.',
     overview:
-      "DIVA is an NLP-based chatbot that gives personalized recipe recommendations based on the user's body mass index and what they're craving. It suggests a balanced main and side dish that fits their calorie and nutrition needs.",
+      "CalorIQ is an NLP-based chatbot that gives personalized recipe recommendations based on the user's body mass index and what they're craving. It suggests a balanced main and side dish that fits their calorie and nutrition needs.",
     problem:
       'Recipe websites give the same generic meals to everyone, and checking whether each dish fits your daily calories takes too much time.',
     contributions: [
@@ -110,7 +115,7 @@ export const projects = [
       { group: 'Back-end', items: ['Python', 'FastAPI'] },
       { group: 'AI / NLP', items: ['Sentence-BERT', 'Groq / Llama', 'RAG'] },
     ],
-    links: [{ label: 'GitHub repo', href: 'https://github.com/myxolorian/DIVA' }],
+    links: [{ label: 'GitHub repo', href: 'https://github.com/myxolorian/CalorIQ' }],
     gallery: [
       { src: img('caloriq', '01.png'), caption: 'Landing page' },
       { src: img('caloriq', '02.png'), caption: 'Profile input' },
@@ -126,7 +131,8 @@ export const projects = [
     category: 'OCR · Climate',
     year: '2025',
     role: 'Fullstack Developer',
-    accent: '#8fd14f',
+    accent: '#84cc16',
+    accent2: '#10b981',
     tagline: 'Scan your electricity bill, see your carbon footprint.',
     summary:
       'Reads PLN bills with OCR, estimates the cost and CO₂ emissions, and tracks consumption month by month.',
@@ -158,7 +164,8 @@ export const projects = [
     category: '.NET · Fullstack',
     year: 2026,
     role: 'Fullstack Developer',
-    accent: '#c9a3ff',
+    accent: '#0d9488',
+    accent2: '#38bdf8',
     tagline: 'Laundry management, from order wizard to shareable receipts.',
     summary:
       'An ASP.NET Core API and a 10-page web app for customers, orders, services, reports and public receipts.',
@@ -187,3 +194,11 @@ export const projects = [
     ],
   },
 ]
+
+// The "coming soon" card shown after the projects. Set to null to hide it.
+export const upcoming = {
+  title: 'Next project',
+  label: 'In progress',
+  text: 'Something new is being built right now. Follow along on GitHub to see it first.',
+  linkLabel: 'Follow on GitHub',
+}

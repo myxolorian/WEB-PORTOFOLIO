@@ -41,13 +41,22 @@ Semua isi website ada di `src/data/`, jadi tidak perlu menyentuh komponen:
 
 ### Screenshot project
 
-Screenshot diambil dari PDF portfolio dan disimpan di `public/images/projects/<slug>/`.
-Resolusinya kecil (±600px) karena mengikuti gambar di PDF, jadi disarankan menggantinya
-dengan screenshot resolusi tinggi (misal 1600px lebar, format `.webp`/`.png`) dengan nama
-file yang sama, atau tambahkan file baru di array `gallery` project terkait.
+Screenshot disimpan di `public/images/projects/<slug>/` dan didaftarkan di array `gallery`
+pada `src/data/projects.js`. Screenshot PNG/JPG ukuran penuh (misal 1920×1080) tidak masalah:
 
-Project **DIVA** belum punya screenshot, sehingga memakai cover tipografi. Tambahkan gambar
-di `public/images/projects/diva/` lalu isi `gallery` di `projects.js` untuk memunculkannya.
+- `npm run dev` dan `npm run build` otomatis menjalankan `scripts/optimize-images.mjs`, yang
+  membuat salinan WebP kecil (640px) dan sedang (1600px) di folder `_opt/`. Website memakai
+  salinan ini, jadi tetap ringan. Folder `_opt/` tidak perlu di-commit (sudah di `.gitignore`),
+  Vercel membuatnya sendiri saat build.
+- Thumbnail kartu project adalah mosaic miring dari gambar-gambar `gallery`, di atas gradient
+  dari `accent` ke `accent2` (atur warnanya per project).
+- Untuk membuat ulang salinan secara manual: `npm run images`.
+
+### Kartu "Coming soon"
+
+Kartu "Next project / Coming soon" di akhir grid diatur lewat `upcoming` di bawah
+`src/data/projects.js`. Ubah teksnya, atau isi `upcoming = null` untuk menyembunyikannya
+(misalnya setelah project baru ditambahkan ke `projects`).
 
 ### CV
 
@@ -68,8 +77,10 @@ Ganti file tersebut (atau ubah `cv` di `profile.js`) saat CV diperbarui.
 src/
   components/   komponen per section (+ CSS masing-masing)
   data/         semua konten website
-  lib/          smooth scroll (Lenis), easing, link sosial
+  lib/          smooth scroll (Lenis), easing, link sosial, path gambar teroptimasi
   styles/       design tokens & style global
+scripts/
+  optimize-images.mjs   membuat salinan WebP dari screenshot project
 public/
   images/       foto profil, screenshot project, og-image
 ```

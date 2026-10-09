@@ -3,56 +3,109 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  perspective: 1400px;
   isolation: isolate;
 }
 
-/* striped surface with a soft glow in the project's accent colour */
+/* vivid two-colour gradient per project, toned down to sit in the dark theme */
 .cover__backdrop {
   position: absolute;
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(
-      ellipse 60% 55% at 50% 58%,
-      color-mix(in srgb, var(--accent) 22%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(ellipse 80% 70% at 50% 40%, rgba(218, 197, 167, 0.08), transparent 75%),
-    repeating-linear-gradient(-35deg, rgba(218, 197, 167, 0.035) 0 2px, transparent 2px 18px), #141311;
+    radial-gradient(ellipse 70% 60% at 20% 15%, rgba(255, 255, 255, 0.14), transparent 60%),
+    linear-gradient(
+      125deg,
+      color-mix(in srgb, var(--accent) 72%, #0e0e0e) 0%,
+      color-mix(in srgb, var(--accent2) 62%, #0e0e0e) 100%
+    );
   transition: transform 1.2s var(--ease-out);
 }
+
+/* ---------- Mosaic (cards) ---------- */
+
+.mosaic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 1.4vw, 20px);
+  width: 128%;
+  transform: translate(-50%, -50%) perspective(2200px) rotateX(18deg) rotateZ(-16deg);
+  transition: transform 1.4s var(--ease-out);
+}
+
+.mosaic__col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.4vw, 20px);
+  transition: transform 1.6s var(--ease-out);
+}
+
+/* staggered columns, like the reference collage */
+.mosaic__col:nth-child(2) {
+  transform: translateY(-14%);
+}
+
+.mosaic__col:nth-child(3) {
+  transform: translateY(6%);
+}
+
+.mosaic__tile {
+  overflow: hidden;
+  border-radius: clamp(6px, 0.8vw, 10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: #f4f4f4;
+  box-shadow:
+    0 24px 40px -18px rgba(0, 0, 0, 0.55),
+    0 8px 16px -10px rgba(0, 0, 0, 0.35);
+}
+
+.mosaic__tile img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top left;
+}
+
+/* darkens the bottom so the glass label stays readable */
+.cover__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(10, 10, 10, 0.6), transparent 42%),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.18), transparent 30%);
+  pointer-events: none;
+}
+
+/* ---------- Flat (pop-up header) ---------- */
 
 .cover__window {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 78%;
-  border-radius: 6px;
+  width: 84%;
+  border-radius: 8px;
   overflow: hidden;
   background: #0b0b0b;
-  border: 1px solid rgba(218, 197, 167, 0.18);
-  box-shadow:
-    0 50px 80px -20px rgba(0, 0, 0, 0.75),
-    0 20px 40px -20px rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -54%) rotateX(14deg) rotateY(-16deg) rotateZ(3deg);
-  transform-origin: center;
-  transition: transform 1.2s var(--ease-out);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 50px 80px -24px rgba(0, 0, 0, 0.65);
+  transform: translate(-50%, -50%);
 }
 
 .cover__bar {
   display: flex;
   gap: 5px;
-  padding: 7px 9px;
+  padding: 8px 10px;
   background: #1a1916;
   border-bottom: 1px solid rgba(218, 197, 167, 0.1);
 }
 
 .cover__bar span {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(218, 197, 167, 0.25);
+  background: rgba(218, 197, 167, 0.3);
 }
 
 .cover__window img {
@@ -61,6 +114,8 @@
   object-fit: cover;
   object-position: top;
 }
+
+/* ---------- No screenshots ---------- */
 
 .cover__type {
   position: absolute;
@@ -74,8 +129,9 @@
   transition: transform 1.2s var(--ease-out);
 }
 
-/* flat variant: used at the top of the project pop-up */
-.cover--flat .cover__window {
-  width: 84%;
-  transform: translate(-50%, -50%);
+@media (prefers-reduced-motion: reduce) {
+  .mosaic,
+  .mosaic__col {
+    transition: none;
+  }
 }

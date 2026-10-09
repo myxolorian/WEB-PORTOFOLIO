@@ -13,6 +13,7 @@ import { projects } from '../data/projects'
 import { useSmoothScroll } from '../lib/SmoothScroll'
 import ProjectCover from './ProjectCover'
 import { EASE } from '../lib/easing'
+import { optimized, srcSet } from '../lib/images'
 import './ProjectModal.css'
 
 const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -60,7 +61,15 @@ function Lightbox({ images, index, onClose, onChange }) {
           transition={{ duration: 0.45, ease: EASE }}
           onClick={(e) => e.stopPropagation()}
         >
-          <img src={image.src} alt={image.caption} />
+          <img
+            src={optimized(image.src, 1600)}
+            alt={image.caption}
+            onError={(e) => {
+              if (e.currentTarget.dataset.fallback) return
+              e.currentTarget.dataset.fallback = 'true'
+              e.currentTarget.src = image.src
+            }}
+          />
           <figcaption className="meta">
             <span className="muted">
               {String(index + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
@@ -157,7 +166,7 @@ function ProjectDetails({ project, index, total, onNavigate, onOpenImage }) {
 
       {project.gallery.length > 0 && (
         <div className="pm__cover">
-          <ProjectCover project={project} flat eager />
+          <ProjectCover project={project} variant="flat" eager />
         </div>
       )}
 
@@ -228,7 +237,21 @@ function ProjectDetails({ project, index, total, onNavigate, onOpenImage }) {
                   aria-label={`View larger: ${image.caption}`}
                 >
                   <span className="pm__shot-frame">
-                    <img src={image.src} alt={image.caption} loading="lazy" decoding="async" />
+                    <img
+                      src={optimized(image.src, 640)}
+                      srcSet={srcSet(image.src)}
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      alt={image.caption}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => {
+                        const img = e.currentTarget
+                        if (img.dataset.fallback) return
+                        img.dataset.fallback = 'true'
+                        img.removeAttribute('srcset')
+                        img.src = image.src
+                      }}
+                    />
                     <span className="badge badge--md pm__shot-icon" aria-hidden="true">
                       <ArrowsOut size={16} weight="light" />
                     </span>
