@@ -16,8 +16,8 @@ export const profile = {
   photo: '/images/kevin.png',
 
   email: 'kevinmahardhika6@gmail.com',
-  phone: '+62 812-1357-3753',
-  whatsapp: 'https://wa.me/6281213573753',
+  phone: '+62 852-2096-5178',
+  whatsapp: 'https://wa.me/6285220965178',
   linkedin: 'https://www.linkedin.com/in/kevin-mahardhika-mulya',
   github: 'https://github.com/myxolorian',
   cv: '/KevinMahardhikaMulya_CV_2026.pdf',
